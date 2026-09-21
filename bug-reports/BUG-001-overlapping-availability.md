@@ -53,8 +53,10 @@ Expected error message should indicate that the requested availability overlaps 
 
 For Example:
 
-```
+```text
+
 Availability overlaps with an existing slot.
+
 ```
 
 ---
@@ -102,7 +104,7 @@ pm.test("Correct overlap error message", function () {
 
 After the defect is fixed, the test should pass with:
 
-```
+```text
 Expected: 400
 Actual: 400
 Result: PASS

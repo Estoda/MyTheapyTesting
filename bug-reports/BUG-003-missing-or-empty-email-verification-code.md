@@ -1,4 +1,4 @@
-# BUG-003: Empty Email Causes Internal Server Error
+# BUG-003: Missing or Empty Email Causes Internal Server Error
 
 ## Summary
 
@@ -34,6 +34,12 @@ The Send Verification Code endpoint returns an Internal Server Error when an emp
 {
   "email": ""
 }
+```
+
+or
+
+```json
+{}
 ```
 
 ---

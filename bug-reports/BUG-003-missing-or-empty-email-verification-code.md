@@ -2,7 +2,7 @@
 
 ## Summary
 
-The Send Verification Code endpoint returns an Internal Server Error when an empty email is provided instead of returning a proper validation error.
+The Send Verification Code endpoint returns an Internal Server Error when the email input is missing, empty, or has an invalid format instead of returning a proper validation error.
 
 ---
 
@@ -17,18 +17,20 @@ The Send Verification Code endpoint returns an Internal Server Error when an emp
 
 ## Preconditions
 
-1. A therapist account exists.
-2. The therapist is authenticated with a valid therapist token.
-3. The therapist already has an availability slot:
-   `14:00 → 15:00`
+1. The API is running and accessible.
+2. No authentication is required for the Send Verification Code endpoint.
 
 ---
 
 ## Steps to Reproduce
 
-1. The API is running and accessible.
-2. No authentication is required for the Send Verification Code endpoint.
-3. The user sends a request with an empty email value.
+### Test Case 1: Empty Email
+
+1. Send a `POST` request to:
+
+   `POST /api/auth/send-verification-code`
+
+2. Use the following request body:
 
 ```json
 {
@@ -36,11 +38,7 @@ The Send Verification Code endpoint returns an Internal Server Error when an emp
 }
 ```
 
-or
-
-```json
-{}
-```
+3. Observe the response.
 
 ---
 

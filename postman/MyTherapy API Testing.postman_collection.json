@@ -1,0 +1,2077 @@
+{
+  "info": {
+    "_postman_id": "c8eb10a8-3829-4fc7-bacf-a6822fa8393e",
+    "name": "MyTherapy API Testing",
+    "description": "MyTherapy API Testing  \n│  \n├── 01 - Authentication  \n│ └── Login  \n│  \n├── 02 - Patient  \n├── 03 - Therapist  \n├── 04 - Admin  \n├── 05 - Reviews  \n├── 06 - Payments  \n└── 07 - Sessions & AI",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "35320710"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Login - Valid - Patient",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function (){\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "const response = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Response contains token\", function(){\r",
+                  "    pm.expect(response.token).to.exist;\r",
+                  "    pm.expect(response.token).to.not.be.empty;\r",
+                  "});\r",
+                  "\r",
+                  "pm.environment.set(\"patientToken\", response.token);\r",
+                  "\r",
+                  "pm.test(\"Response contains expiration\", function(){\r",
+                  "    const response = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(response.expiration).to.exist;\r",
+                  "})"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"programmer82253@gmail.com\",\r\n  \"password\": \"admin\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login - Valid - Therapist",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function (){\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "const response = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Response contains token\", function(){\r",
+                  "    pm.expect(response.token).to.exist;\r",
+                  "    pm.expect(response.token).to.not.be.empty;\r",
+                  "});\r",
+                  "\r",
+                  "pm.environment.set(\"therapistToken\", response.token);\r",
+                  "\r",
+                  "pm.test(\"Response contains expiration\", function(){\r",
+                  "    const response = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(response.expiration).to.exist;\r",
+                  "})"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"estoda82253@gmail.com\",\r\n  \"password\": \"admin\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login - Valid - Admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function (){\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "const response = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Response contains token\", function(){\r",
+                  "    pm.expect(response.token).to.exist;\r",
+                  "    pm.expect(response.token).to.not.be.empty;\r",
+                  "});\r",
+                  "\r",
+                  "pm.environment.set(\"admintToken\", response.token);\r",
+                  "\r",
+                  "pm.test(\"Response contains expiration\", function(){\r",
+                  "    const response = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(response.expiration).to.exist;\r",
+                  "})"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"admin@mytherapy.com\",\r\n  \"password\": \"Admin@123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login - Invalid - Wrong Password",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 401\", function (){\r",
+                  "    pm.response.to.have.status(401);\r",
+                  "});\r",
+                  "\r",
+                  "const response = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Error message is correct\", function() {\r",
+                  "    pm.expect(response.Message).to.eql(\"Invalid credentials!\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response contains status code\", function() {\r",
+                  "    pm.expect(response.StatusCode).to.eql(401);\r",
+                  "})"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"programmer82253@gmail.com\",\r\n  \"password\": \"wrong password\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login - Invalid - Empty Password",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 401\", function (){\r",
+                  "    pm.response.to.have.status(401);\r",
+                  "});\r",
+                  "\r",
+                  "const response = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Error message is correct\", function() {\r",
+                  "    pm.expect(response.Message).to.eql(\"Invalid credentials!\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response contains status code\", function() {\r",
+                  "    pm.expect(response.StatusCode).to.eql(401);\r",
+                  "})"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"programmer82253@gmail.com\",\r\n  \"password\": \"\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login - Invalid - Missing Password Field",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 400\", function (){\r",
+                  "    pm.response.to.have.status(400);\r",
+                  "});\r",
+                  "\r",
+                  "const response = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Validation error is returned\", function() {\r",
+                  "    pm.expect(response.title).to.eql(\r",
+                  "        \"One or more validation errors occurred.\"\r",
+                  "    );\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Password validation error is returned\", function() {\r",
+                  "    pm.expect(response.errors.Password).to.exist;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Correct password validation message\", function() {\r",
+                  "    pm.expect(response.errors.Password).to.include(\r",
+                  "        \"The Password field is required.\"\r",
+                  "    );\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"programmer82253@gmail.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login - Invalid - Non Existing Email",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 401\", function (){\r",
+                  "    pm.response.to.have.status(401);\r",
+                  "});\r",
+                  "\r",
+                  "const response = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Error message is correct\", function() {\r",
+                  "    pm.expect(response.Message).to.eql(\"Invalid credentials!\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response contains status code\", function() {\r",
+                  "    pm.expect(response.StatusCode).to.eql(401);\r",
+                  "})"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"tasneemtawfeek@gmail.com\",\r\n  \"password\": \"admin\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login - Invalid - Empty Email",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 401\", function (){\r",
+                  "    pm.response.to.have.status(401);\r",
+                  "});\r",
+                  "\r",
+                  "const response = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Error message is correct\", function() {\r",
+                  "    pm.expect(response.Message).to.eql(\"Invalid credentials!\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response contains status code\", function() {\r",
+                  "    pm.expect(response.StatusCode).to.eql(401);\r",
+                  "})"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"\",\r\n  \"password\": \"admin\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login - Invalid - Missing Email Field",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 400\", function (){\r",
+                  "    pm.response.to.have.status(400);\r",
+                  "});\r",
+                  "\r",
+                  "const response = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Validation error is returned\", function() {\r",
+                  "    pm.expect(response.title).to.eql(\r",
+                  "        \"One or more validation errors occurred.\"\r",
+                  "    );\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Email validation error is returned\", function() {\r",
+                  "    pm.expect(response.errors.Email).to.exist;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Correct email validation message\", function() {\r",
+                  "    pm.expect(response.errors.Email).to.include(\r",
+                  "        \"The Email field is required.\"\r",
+                  "    );\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"password\": \"admin\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login - Invalid - Invalid Email Format",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 401\", function () {\r",
+                  "    pm.response.to.have.status(401);\r",
+                  "});\r",
+                  "\r",
+                  "const response = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Error message is correct\", function() {\r",
+                  "    pm.expect(response.Message).to.eql(\"Invalid credentials!\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response contains status code\", function() {\r",
+                  "    pm.expect(response.StatusCode).to.eql(401);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"abc\",\r\n    \"password\": \"admin\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login - Invalid - Empty Body",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 400\", function () {\r",
+                  "    pm.response.to.have.status(400);\r",
+                  "});\r",
+                  "\r",
+                  "const response = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Validation error is returned\", function () {\r",
+                  "    pm.expect(response.title).to.eql(\r",
+                  "        \"One or more validation errors occurred.\"\r",
+                  "    );\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Email is required\", function () {\r",
+                  "    pm.expect(response.errors.Email).to.include(\r",
+                  "        \"The Email field is required.\"\r",
+                  "    );\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Password is required\", function () {\r",
+                  "    pm.expect(response.errors.Password).to.include(\r",
+                  "        \"The Password field is required.\"\r",
+                  "    );\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login - Invalid - Null Values",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 400\", function () {\r",
+                  "    pm.response.to.have.status(400);\r",
+                  "});\r",
+                  "\r",
+                  "const response = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Validation error is returned\", function () {\r",
+                  "    pm.expect(response.title).to.eql(\r",
+                  "        \"One or more validation errors occurred.\"\r",
+                  "    );\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Email is required\", function () {\r",
+                  "    pm.expect(response.errors.Email).to.include(\r",
+                  "        \"The Email field is required.\"\r",
+                  "    );\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Password is required\", function () {\r",
+                  "    pm.expect(response.errors.Password).to.include(\r",
+                  "        \"The Password field is required.\"\r",
+                  "    );\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": null,\r\n    \"password\": null\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login - Invalid - Extra/Unknown Fields",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 401\", function (){\r",
+                  "    pm.response.to.have.status(401);\r",
+                  "});\r",
+                  "\r",
+                  "const response = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Error message is correct\", function() {\r",
+                  "    pm.expect(response.Message).to.eql(\"Invalid credentials!\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response contains status code\", function() {\r",
+                  "    pm.expect(response.StatusCode).to.eql(401);\r",
+                  "})"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"YOUR_VALID_EMAIL\",\r\n    \"password\": \"admin\",\r\n    \"role\": \"Admin\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Send Verification Code - Valid - Valid Email",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function() {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "const response = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Response contains success message\", function() {\r",
+                  "    pm.expect(response.message).to.exist;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Success message is correct\", function() {\r",
+                  "    pm.expect(response.message).to.eql(\r",
+                  "        \"Verification code sent to your email.\"\r",
+                  "    );\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"ahmed@gmail.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/send-verification-code",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "send-verification-code"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Send Verification Code - Invalid - Empty Email",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Empty email should return 400\", function () {\r",
+                  "    pm.response.to.have.status(400);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/send-verification-code",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "send-verification-code"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Send Verification Code - Invalid - Missing Email Field",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Missing email should return 400\", function () {\r",
+                  "    pm.response.to.have.status(400);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/send-verification-code",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "send-verification-code"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Send Verification Code - Invalid - Invalid Email Format",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Invalid email format should return 400\", function () {\r",
+                  "    pm.response.to.have.status(400);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"abc\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/send-verification-code",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "send-verification-code"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Send Verification Code - Invalid - Null Email",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 400\", function () {\r",
+                  "    pm.response.to.have.status(400);\r",
+                  "});\r",
+                  "\r",
+                  "const response = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Validation error is returned\", function () {\r",
+                  "    pm.expect(response.title).to.eql(\r",
+                  "        \"One or more validation errors occurred.\"\r",
+                  "    );\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Email validation error is returned\", function () {\r",
+                  "    pm.expect(response.errors.Email).to.exist;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Correct email validation message\", function () {\r",
+                  "    pm.expect(response.errors.Email).to.include(\r",
+                  "        \"The Email field is required.\"\r",
+                  "    );\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": null\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/send-verification-code",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "send-verification-code"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Send Verification Code - Invalid - Email With Spaces",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Whitespace email should return 400\", function () {\r",
+                  "    pm.response.to.have.status(400);\r",
+                  "});\r",
+                  "\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"    \"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/send-verification-code",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "send-verification-code"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Patient",
+      "item": [
+        {
+          "name": "Get Available Slots",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response is an array\", function() {\r",
+                  "    const response = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(response).to.be.an(\"array\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{patientToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/patient/availability/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "patient",
+                "availability",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Book Appointment - Valid",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Booking request succeeded\", function() {\r",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r",
+                  "});\r",
+                  "\r",
+                  "const response = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Response contains appointmentId\", function () {\r",
+                  "    pm.expect(response.appointmentId).to.exist;\r",
+                  "    pm.expect(response.appointmentId).to.not.be.empty;\r",
+                  "    pm.expect(response.appointmentId).to.be.a('string');\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response contains slotId\", function () {\r",
+                  "    pm.expect(response.slotId).to.exist;\r",
+                  "    pm.expect(response.slotId).to.not.be.empty;\r",
+                  "    pm.expect(response.slotId).to.be.a('string');\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response contains therapist name\", function() {\r",
+                  "    pm.expect(response.therapistName).to.exist;\r",
+                  "    pm.expect(response.therapistName).to.not.be.empty;\r",
+                  "    pm.expect(response.therapistName).to.be.a('string');\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Appointment status is Scheduled\", function() {\r",
+                  "    pm.expect(response.status).to.equal('Scheduled');\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Duration is 60 minutes\", function() {\r",
+                  "    pm.expect(response.durationMinutes).to.equal(60);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Appointment datetime exists\", function() {\r",
+                  "    pm.expect(response.appointmentDatetime).to.exist;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"CreatedAt exists\", function() {\r",
+                  "    pm.expect(response.createdAt).to.exist;\r",
+                  "});\r",
+                  "\r",
+                  "// for future requests\r",
+                  "pm.environment.set(\"appointmentId\", response.appointmentId);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{patientToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"slotId\": \"e6de1f41-0d44-4d77-b007-cdbefa4599ff\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/patient/bookings",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "patient",
+                "bookings"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Book Appointment - Invalid - Already Booked",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Booking already booked slot should fail\", function() {\r",
+                  "    pm.expect(pm.response.code).to.be.oneOf([400, 409]);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{patientToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"slotId\": \"e6de1f41-0d44-4d77-b007-cdbefa4599ff\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/patient/bookings",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "patient",
+                "bookings"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get My Appointments",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response is an array\", function() {\r",
+                  "    const response = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(response).to.be.an(\"array\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Appointment list is not empty\", function() {\r",
+                  "    const appointments = pm.response.json();\r",
+                  "\r",
+                  "    pm.expect(appointments.length).to.be.greaterThan(0);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Booked appointment exists in patient's appointments\", function() {\r",
+                  "    const appointments = pm.response.json();\r",
+                  "\r",
+                  "    const appointment = appointments.find(\r",
+                  "        item => item.appointmentId === pm.environment.get(\"appointmentId\")\r",
+                  "    );\r",
+                  "\r",
+                  "    pm.expect(appointment).to.exist;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Appointment status is Scheduled\", function() {\r",
+                  "    const appointments = pm.response.json();\r",
+                  "\r",
+                  "    const appointment = appointments.find(\r",
+                  "        item => item.appointmentId === pm.environment.get(\"appointmentId\")\r",
+                  "    );\r",
+                  "\r",
+                  "    pm.expect(appointment).to.exist;\r",
+                  "    pm.expect(appointment.status).to.eql(\"Scheduled\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{patientToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/patient/bookings/my",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "patient",
+                "bookings",
+                "my"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Therapist",
+      "item": [
+        {
+          "name": "Get My Availability",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function() {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "const response = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Response is an array\", function() {\r",
+                  "    pm.expect(pm.response.json()).to.be.an('array');\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"All slots belong to the therapist\", function() {\r",
+                  "    response.forEach(slot => {\r",
+                  "        pm.expect(slot.therapistId).to.equal(\r",
+                  "            \"89f1cd95-952b-45b2-b1fd-29156bf68040\"\r",
+                  "        );\r",
+                  "    });\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Each slot contains required fields\", function() {\r",
+                  "    response.forEach(slot => {\r",
+                  "        pm.expect(slot).to.have.property(\"slotId\");\r",
+                  "        pm.expect(slot).to.have.property(\"therapistId\");\r",
+                  "        pm.expect(slot).to.have.property(\"startTime\");\r",
+                  "        pm.expect(slot).to.have.property(\"endTime\");\r",
+                  "        pm.expect(slot).to.have.property(\"isBooked\");\r",
+                  "    })\r",
+                  "})\r",
+                  "\r",
+                  "pm.test(\"Start time is before end time\", function() {\r",
+                  "    response.forEach(slot => {\r",
+                  "        pm.expect(\r",
+                  "            new Date(slot.startTime)\r",
+                  "        ).to.be.below(new Date(slot.endTime));\r",
+                  "    });\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{therapistToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/therapist/availability/my",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "therapist",
+                "availability",
+                "my"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Availability - Valid",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function() {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "const response = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Response contains slotId\", function() {\r",
+                  "    pm.expect(response.slotId).to.exist;\r",
+                  "    pm.expect(response.slotId).to.not.be.empty;\r",
+                  "    pm.expect(response.slotId).to.be.a('string');\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Slot belongs to the therapist\", function() {\r",
+                  "    pm.expect(response.therapistId).to.equal(\r",
+                  "        \"89f1cd95-952b-45b2-b1fd-29156bf68040\"\r",
+                  "    );\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"New Slot is not booked\", function() {\r",
+                  "    pm.expect(response.isBooked).to.equal(false);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Start time is before end time\", function() {\r",
+                  "    pm.expect(new Date(response.startTime))\r",
+                  "        .to.be.below(new Date(response.endTime));\r",
+                  "});\r",
+                  "\r",
+                  "pm.environment.set(\"createdSlotId\", response.slotId);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{therapistToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"startTime\": \"2026-09-17T14:00:00Z\",\r\n  \"endTime\": \"2026-09-17T15:00:00Z\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/therapist/availability",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "therapist",
+                "availability"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Availability - Invalid - Overlapping",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 400\", function() {\r",
+                  "    pm.response.to.have.status(400);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Error message is correct\", function() {\r",
+                  "    pm.expect(pm.response.text()).to.include(\r",
+                  "        \"Availability overlaps with an existing slot.\"\r",
+                  "    );\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{therapistToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"startTime\": \"2026-09-18T14:00:00Z\",\r\n  \"endTime\": \"2026-09-18T15:00:00Z\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/therapist/availability",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "therapist",
+                "availability"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Availability - Invalid - End Before Start",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 400\", function() {\r",
+                  "    pm.response.to.have.status(400);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Error message is correct\", function() {\r",
+                  "    pm.expect(pm.response.text()).to.include(\r",
+                  "        \"End time must be after start time.\"\r",
+                  "    );\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{therapistToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"startTime\": \"2026-09-18T15:00:00Z\",\r\n  \"endTime\": \"2026-09-18T14:00:00Z\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/therapist/availability",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "therapist",
+                "availability"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Availability - Invalid - End Equals Start",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 400\", function() {\r",
+                  "    pm.response.to.have.status(400);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Error message is correct\", function() {\r",
+                  "    pm.expect(pm.response.text()).to.include(\r",
+                  "        \"End time must be after start time.\"\r",
+                  "    );\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{therapistToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"startTime\": \"2026-09-18T15:00:00Z\",\r\n  \"endTime\": \"2026-09-18T14:00:00Z\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/therapist/availability",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "therapist",
+                "availability"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Availability - Invalid - Past Time",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 400\", function() {\r",
+                  "    pm.response.to.have.status(400);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Error message is correct\", function() {\r",
+                  "    pm.expect(pm.response.text()).to.include(\r",
+                  "        \"Start time must be in the future.\"\r",
+                  "    );\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{therapistToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"startTime\": \"2026-09-17T15:00:00Z\",\r\n  \"endTime\": \"2026-09-17T14:00:00Z\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/therapist/availability",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "therapist",
+                "availability"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Availability - Valid",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function() {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response body is empty\", function() {\r",
+                  "    pm.expect(pm.response.text()).to.be.empty;\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{therapistToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/therapist/availability/asdgsgsadg",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "therapist",
+                "availability",
+                "asdgsgsadg"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Availability - Invalid - Already Deleted",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 404\", function() {\r",
+                  "    pm.response.to.have.status(404);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Error message is correct\", function() {\r",
+                  "   pm.expect(pm.response.text()).to.include(\"Slot not found.\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{therapistToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/therapist/availability/{{createdSlotId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "therapist",
+                "availability",
+                "{{createdSlotId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Availability - Invalid - Nonexistent ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 400\", function () {\r",
+                  "    pm.response.to.have.status(400);\r",
+                  "});\r",
+                  "\r",
+                  "const response = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"Error message is correct\", function () {\r",
+                  "    pm.expect(response.title).to.eql(\r",
+                  "        \"One or more validation errors occurred.\"\r",
+                  "    );\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Invalid ID error is returned\", function () {\r",
+                  "    pm.expect(response.errors.id).to.exist;\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{therapistToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/therapist/availability/asdgsgsadg",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "therapist",
+                "availability",
+                "asdgsgsadg"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Availability - Invalid - Unauthorized",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function() {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response body is empty\", function() {\r",
+                  "    pm.expect(pm.response.text()).to.be.empty;\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{therapistToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/therapist/availability/asdgsgsadg",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "therapist",
+                "availability",
+                "asdgsgsadg"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Availability - Invalid - Patient Role",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function() {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response body is empty\", function() {\r",
+                  "    pm.expect(pm.response.text()).to.be.empty;\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{therapistToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/therapist/availability/asdgsgsadg",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "therapist",
+                "availability",
+                "asdgsgsadg"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Availability - Invalid - Other Therapist Slot",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 403 or 404\", function() {\r",
+                  "    pm.response.to.be.oneOf([403, 404]);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Error message is correct\", function() {\r",
+                  "    pm.expect(pm.response.text()).to.be.empty;\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImIyMTg0OWNmLTM2NmYtNGRmNy1hMGEzLTUzODM0N2NhOTg4ZCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6ImFobWVkYW1pbkBnbWFpLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlRoZXJhcGlzdCIsImV4cCI6MTc4OTczOTEwMCwiaXNzIjoiTXlUaGVyYXB5IiwiYXVkIjoiTXlUaGVyYXB5VXNlcnMifQ.5oTlU7Q4D5Gqh084GPT0KeAu9YnLBdoGxyDMEyCcURc",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/therapist/availability/ce68e39d-5c18-49e7-8895-4198587fb588",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "therapist",
+                "availability",
+                "ce68e39d-5c18-49e7-8895-4198587fb588"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
